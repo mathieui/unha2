@@ -141,6 +141,15 @@ def get_user_roles(uid):
     }
     return msg
 
+def get_room_roles(uid, room_id):
+    msg = {
+        'msg': 'method',
+        'method': 'getRoomRoles',
+        'id': uid,
+        'params': [room_id]
+    }
+    return msg
+
 def star_message(uid, mid, room_id, starred):
     msg = {
         'msg': 'method',
