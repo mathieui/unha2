@@ -40,17 +40,20 @@ a string.
 This gives us, in python:
 
 ::
+
     json.dumps([json.dumps({"a":"b"})])
 
 Which gives us the following string for a frame we send to the server:
 
 ::
+
     ["{\"a\": \"b\"}"]
 
 And, for a frame received from the server, we have to add SockJS, so
 we receive:
 
 ::
+
     a["{\"a\": \"b\"}"]
 
 
