@@ -1,8 +1,15 @@
 
-ALLOWED_USER_SUBS = ['notification', 'rooms-changed', 'subscriptions-changed', 'otr', 'webrtc', 'message']
+ALLOWED_USER_SUBS = [
+    'notification',
+    'rooms-changed',
+    'subscriptions-changed',
+    'otr',
+    'webrtc',
+    'message'
+]
 
 def sub_notify_user(uid, user_id, sub):
-    assert sub in ALLOWED_SUBS
+    assert sub in ALLOWED_USER_SUBS
     msg = {
         'msg': 'sub',
         'name': 'stream-notify-user',
@@ -42,7 +49,14 @@ def sub_room_messages(uid, room_id):
     }
     return msg
 
-ALLOWED_NOTIFY_SUBS = ['roles-change', 'updateEmojiCustom', 'deleteEmojiCustom', 'updateAvatar', 'public-settings-changed', 'permissions-changed']
+ALLOWED_NOTIFY_SUBS = [
+    'roles-change',
+    'updateEmojiCustom',
+    'deleteEmojiCustom',
+    'updateAvatar',
+    'public-settings-changed',
+    'permissions-changed'
+]
 
 def sub_notify_all(uid, sub):
     assert sub in ALLOWED_NOTIFY_SUBS
