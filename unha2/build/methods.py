@@ -4,15 +4,26 @@ def login_sha256(uid, username, password):
     hashed = sha256(password.encode()).hexdigest()
     msg = {
         'msg': 'method',
-        'method': 'login', 
+        'method': 'login',
         'id': uid,
         'params': [{
-            'user': { 'username': username }
+            'user': {'username': username},
             'password': {
                 'digest': hashed,
                 'algorithm': 'sha-256'
             }
         }]
+    }
+    return msg
+
+def login_resume(uid, token):
+    msg = {
+        'msg': 'method',
+        'method': 'login',
+        'id': uid,
+        'params': [
+            {'user': token}
+        ]
     }
     return msg
 
@@ -22,7 +33,7 @@ def get_rooms(uid, date):
         'method': 'rooms/get',
         'id': uid,
         'params': [
-            { '$date': date }
+            {'$date': date}
         ]
     }
     return msg
@@ -33,7 +44,7 @@ def get_users(uid, room_id):
         'id': uid,
         'method': 'getUsersOfRoom',
         'params': [
-            room_idk,
+            room_id,
             False
         ]
     }
@@ -71,7 +82,7 @@ def mark_messages_read(uid, room_id):
     }
     return msg
 
-def create_channel(uid, name, users=None, ro=False):
+def create_channel(uid, name, users=None, readonly=False):
     if users is None:
         users = []
     msg = {
@@ -81,7 +92,7 @@ def create_channel(uid, name, users=None, ro=False):
         'params': [
             name,
             users,
-            ro
+            readonly
         ]
     }
     return msg
@@ -210,7 +221,7 @@ def leave_room(uid, room_id):
         'id': uid,
         'params': [room_id]
     }
-    return room_id
+    return msg
 
 def hide_room(uid, room_id):
     msg = {
