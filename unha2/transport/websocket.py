@@ -1,9 +1,10 @@
+import json
 import logging
 import random
 
 import aiohttp
 
-from .. common import dumbs
+from .. common import dumbs, undumbs
 
 log = logging.getLogger(__name__)
 
@@ -29,7 +30,7 @@ async def ws_loop(ws, handler, o_handler=_empty, h_handler=_empty,
             elif char == 'o':
                 _empty_close(content)
             elif char == 'a':
-                handler(content)
+                handler(undumbs(content))
             else:
                 log.warning('Unknown sockjs frame command: "%s"', char)
         elif msg.type == aiohttp.WSMsgType.CLOSED:

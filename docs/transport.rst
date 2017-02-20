@@ -56,5 +56,13 @@ we receive:
 
     a["{\"a\": \"b\"}"]
 
+Oh, and the first thing you will receive after sockjs starts the exchange
+is
+
+::
+
+    a["{\"server-id\": \"0\"}"]
+
+Apparently for compatibility reasons. It serves no purpose.
 
 .. _SockJs protocol: https://sockjs.github.io/sockjs-protocol/sockjs-protocol-0.3.html

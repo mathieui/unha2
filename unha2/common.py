@@ -8,5 +8,8 @@ def uuid():
 def dumbs(payload):
     return json.dumps([json.dumps(payload)])
 
+def undumbs(payload):
+    return json.loads(json.loads(payload)[0])
+
 def ts(obj):
     return datetime.fromtimestamp(obj['$date'])
