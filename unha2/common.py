@@ -12,4 +12,4 @@ def undumbs(payload):
     return json.loads(json.loads(payload)[0])
 
 def ts(obj):
-    return datetime.fromtimestamp(obj['$date'])
+    return datetime.fromtimestamp(obj['$date'] // 1000)
