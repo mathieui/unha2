@@ -38,14 +38,14 @@ def get_rooms(uid, date):
     }
     return msg
 
-def get_users(uid, room_id):
+def get_users(uid, room_id, offline_users=False):
     msg = {
         'msg': 'method',
         'id': uid,
         'method': 'getUsersOfRoom',
         'params': [
             room_id,
-            False
+            offline_users
         ]
     }
     return msg
@@ -265,3 +265,11 @@ def save_room_setting(uid, room_id, setting, value):
         ]
     }
     return msg
+
+def get_subscriptions(uid, date=0):
+    return {
+        'msg': 'method',
+        'method': 'subscriptions/get',
+        'id': uid,
+        'params': [{'$date': date}]
+    }
