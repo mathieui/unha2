@@ -9,7 +9,8 @@ from .. common import dumbs, undumbs
 log = logging.getLogger(__name__)
 
 def send(ws, payload):
-    ws.send(dumbs(payload))
+    log.debug('SEND %s', payload)
+    ws.send_str(dumbs(payload))
 
 def _empty(msg):
     pass
