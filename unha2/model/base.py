@@ -28,6 +28,9 @@ class User:
     def __eq__(self, other):
         return self.id == other.id and self.name == other.name
 
+    def __repr__(self):
+        return '%s[%s]' % (self.name, self.id)
+
 class Subscription:
     def __init__(self, obj):
         self.type = RoomType(obj['t'])
