@@ -1,6 +1,24 @@
 import enum
 from .. common import ts
 
+
+class RoomType(enum.Enum):
+    CHAT = 'c'
+    PRIVATE = 'p'
+    DIRECT = 'd'
+
+class RawMessageType(enum.Enum):
+    PING = 'ping'
+    CONNECTED = 'connected'
+    ADDED = 'added'
+    CHANGED = 'changed'
+    UPDATED = 'updated'
+    REMOVED = 'removed'
+    RESULT = 'result'
+    FAILED = 'failed'
+    ERROR = 'error'
+    NONE = ''
+
 class User:
     __slots__ = ['id', 'name']
     def __init__(self, obj):
@@ -9,11 +27,6 @@ class User:
 
     def __eq__(self, other):
         return self.id == other.id and self.name == other.name
-
-class RoomType(enum.Enum):
-    CHAT = 'c'
-    PRIVATE = 'p'
-    DIRECT = 'd'
 
 class Subscription:
     def __init__(self, obj):
