@@ -20,6 +20,18 @@ class RawMessageType(enum.Enum):
     READY = 'ready'
     NONE = ''
 
+
+class RoomMessage(enum.Enum):
+    USER_JOINED = 'uj'
+    USER_LEFT = 'ul'
+    USER_ADDED = 'au'
+    USER_REMOVED = 'ru'
+    USER_MUTED = 'user-muted'
+    USER_UNMUTED = 'user-unmuted'
+    ROLE_ADDED = 'subscription-role-added'
+    ROLE_REMOVED = 'subscription-role-removed'
+    TOPIC_CHANGED = 'room-changed-topic'
+
 class User:
     __slots__ = ['id', 'name']
     def __init__(self, obj):
