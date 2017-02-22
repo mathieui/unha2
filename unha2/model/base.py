@@ -17,6 +17,7 @@ class RawMessageType(enum.Enum):
     RESULT = 'result'
     FAILED = 'failed'
     ERROR = 'error'
+    READY = 'ready'
     NONE = ''
 
 class User:
