@@ -53,3 +53,11 @@ async def login_sha256(ws, holder, username, password):
     payload = build.methods.login_sha256(uid, username, password)
     result = await holder.send_method(ws, uid, payload)
     return parse.result.parse_login(result['result'])
+
+async def send_message(ws, holder, room_id, text):
+    uid = uuid()
+    mid = uuid()
+    payload = build.methods.send_text_message(uid, mid, room_id, text)
+    result = await holder.send_method(ws, uid, payload)
+    return result
+
