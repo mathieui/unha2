@@ -27,7 +27,7 @@ class RoomMessage(enum.Enum):
     USER_UNMUTED = 'user-unmuted'
     ROLE_ADDED = 'subscription-role-added'
     ROLE_REMOVED = 'subscription-role-removed'
-    TOPIC_CHANGED = 'room-changed-topic'
+    TOPIC_CHANGED = 'room_changed_topic'
     NORMAL_MESSAGE = ''
 
 class ChangedStreamMessage(enum.Enum):
