@@ -1,4 +1,5 @@
 import enum
+from typing import Mapping
 
 class RoomType(enum.Enum):
     CHAT = 'c'
@@ -43,13 +44,13 @@ class NotifyUser(enum.Enum):
 
 class User:
     __slots__ = ['id', 'name']
-    def __init__(self, obj):
+    def __init__(self, obj: Mapping[str, str]):
         self.id = obj['_id']
         self.name = obj['username']
 
     def __eq__(self, other):
         return self.id == other.id and self.name == other.name
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return '%s[%s]' % (self.name, self.id)
 

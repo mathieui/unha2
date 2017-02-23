@@ -1,6 +1,7 @@
 from hashlib import sha256
+from typing import Optional, List
 
-def login_sha256(uid, username, password):
+def login_sha256(uid: str, username: str, password: str) -> dict:
     hashed = sha256(password.encode()).hexdigest()
     msg = {
         'msg': 'method',
@@ -16,7 +17,7 @@ def login_sha256(uid, username, password):
     }
     return msg
 
-def login_resume(uid, token):
+def login_resume(uid: str, token: str) -> dict:
     msg = {
         'msg': 'method',
         'method': 'login',
@@ -27,7 +28,7 @@ def login_resume(uid, token):
     }
     return msg
 
-def get_rooms(uid, date):
+def get_rooms(uid: str, date: str) -> dict:
     msg = {
         'msg': 'method',
         'method': 'rooms/get',
@@ -38,7 +39,7 @@ def get_rooms(uid, date):
     }
     return msg
 
-def get_users(uid, room_id, offline_users=False):
+def get_users(uid: str, room_id: str, offline_users=False) -> dict:
     msg = {
         'msg': 'method',
         'id': uid,
@@ -50,7 +51,7 @@ def get_users(uid, room_id, offline_users=False):
     }
     return msg
 
-def get_room_id(uid, room_name):
+def get_room_id(uid: str, room_name: str) -> dict:
     msg = {
         'msg': 'method',
         'id': uid,
@@ -59,7 +60,7 @@ def get_room_id(uid, room_name):
     }
     return msg
 
-def load_history(uid, room_id, last_received, quantity, oldest_wanted=None):
+def load_history(uid: str, room_id: str, last_received: str, quantity: int, oldest_wanted=None) -> dict:
     msg = {
         'msg': 'method',
         'method': 'loadHistory',
@@ -73,7 +74,7 @@ def load_history(uid, room_id, last_received, quantity, oldest_wanted=None):
     }
     return msg
 
-def mark_messages_read(uid, room_id):
+def mark_messages_read(uid: str, room_id: str) -> dict:
     msg = {
         'msg': 'method',
         'method': 'readMessages',
@@ -82,7 +83,7 @@ def mark_messages_read(uid, room_id):
     }
     return msg
 
-def create_channel(uid, name, users=None, readonly=False):
+def create_channel(uid: str, name: str, users: Optional[List[str]]=None, readonly=False) -> dict:
     if users is None:
         users = []
     msg = {
@@ -97,7 +98,7 @@ def create_channel(uid, name, users=None, readonly=False):
     }
     return msg
 
-def create_private_group(uid, name, users=None):
+def create_private_group(uid: str, name: str, users: Optional[List[str]]=None) -> dict:
     if users is None:
         users = []
     msg = {
@@ -111,7 +112,7 @@ def create_private_group(uid, name, users=None):
     }
     return msg
 
-def send_text_message(uid, mid, room_id, text):
+def send_text_message(uid: str, mid: str, room_id: str, text: str) -> dict:
     msg = {
         'msg': 'method',
         'method': 'sendMessage',
@@ -124,7 +125,7 @@ def send_text_message(uid, mid, room_id, text):
     }
     return msg
 
-def set_presence(uid, status):
+def set_presence(uid: str, status: str) -> dict:
     assert status in ('online', 'busy', 'away', 'offline')
     msg = {
         'msg': 'method',
@@ -134,7 +135,7 @@ def set_presence(uid, status):
     }
     return msg
 
-def get_permissions(uid):
+def get_permissions(uid: str) -> dict:
     msg = {
         'msg': 'method',
         'method': 'permissions/get',
@@ -143,7 +144,7 @@ def get_permissions(uid):
     }
     return msg
 
-def get_user_roles(uid):
+def get_user_roles(uid: str) -> dict:
     msg = {
         'msg': 'method',
         'method': 'getUserRoles',
@@ -152,7 +153,7 @@ def get_user_roles(uid):
     }
     return msg
 
-def get_room_roles(uid, room_id):
+def get_room_roles(uid: str, room_id: str) -> dict:
     msg = {
         'msg': 'method',
         'method': 'getRoomRoles',
@@ -161,7 +162,7 @@ def get_room_roles(uid, room_id):
     }
     return msg
 
-def star_message(uid, mid, room_id, starred):
+def star_message(uid: str, mid: str, room_id: str, starred: bool) -> dict:
     msg = {
         'msg': 'method',
         'method': 'starMessage',
@@ -174,7 +175,7 @@ def star_message(uid, mid, room_id, starred):
     }
     return msg
 
-def delete_room(uid, room_id):
+def delete_room(uid: str, room_id: str) -> dict:
     msg = {
         'msg': 'method',
         'method': 'eraseRoom',
@@ -183,7 +184,7 @@ def delete_room(uid, room_id):
     }
     return msg
 
-def archive_room(uid, room_id):
+def archive_room(uid: str, room_id: str) -> dict:
     msg = {
         'msg': 'method',
         'method': 'archiveRoom',
@@ -192,7 +193,7 @@ def archive_room(uid, room_id):
     }
     return msg
 
-def unarchive_room(uid, room_id):
+def unarchive_room(uid: str, room_id: str) -> dict:
     msg = {
         'msg': 'method',
         'method': 'unarchiveRoom',
@@ -201,7 +202,7 @@ def unarchive_room(uid, room_id):
     }
     return msg
 
-def join_room(uid, room_id, join_code=None):
+def join_room(uid: str, room_id: str, join_code: Optional[str]=None) -> dict:
     if join_code:
         params = [room_id, join_code]
     else:
@@ -214,7 +215,7 @@ def join_room(uid, room_id, join_code=None):
     }
     return msg
 
-def leave_room(uid, room_id):
+def leave_room(uid: str, room_id: str) -> dict:
     msg = {
         'msg': 'method',
         'method': 'leaveRoom',
@@ -223,7 +224,7 @@ def leave_room(uid, room_id):
     }
     return msg
 
-def hide_room(uid, room_id):
+def hide_room(uid: str, room_id: str) -> dict:
     msg = {
         'msg': 'method',
         'method': 'hideRoom',
@@ -232,7 +233,7 @@ def hide_room(uid, room_id):
     }
     return msg
 
-def open_room(uid, room_id):
+def open_room(uid: str, room_id: str) -> dict:
     msg = {
         'msg': 'method',
         'method': 'openRoom',
@@ -241,7 +242,7 @@ def open_room(uid, room_id):
     }
     return msg
 
-def fav_room(uid, room_id, fav_status):
+def fav_room(uid: str, room_id: str, fav_status: bool) -> dict:
     msg = {
         'msg': 'method',
         'method': 'toggleFavorite',
@@ -253,7 +254,7 @@ def fav_room(uid, room_id, fav_status):
     }
     return msg
 
-def save_room_setting(uid, room_id, setting, value):
+def save_room_setting(uid: str, room_id: str, setting: str, value: str):
     msg = {
         'msg': 'method',
         'method': 'saveRoomSettings',
@@ -266,7 +267,7 @@ def save_room_setting(uid, room_id, setting, value):
     }
     return msg
 
-def get_subscriptions(uid, date=0):
+def get_subscriptions(uid: str, date=0):
     return {
         'msg': 'method',
         'method': 'subscriptions/get',
