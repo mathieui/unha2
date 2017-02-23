@@ -47,18 +47,6 @@ def parse_changed_msg(msg):
 def parse_removed_users(msg):
     user_id = msg['_id']
 
-def parse_room_message(msg):
-    message = msg['fields']['args'][0]
-    room_args = msg['fields']['args'][1]
-
-    msg_t = msg.get('t')
-    if t is None: # message
-        return RoomMessage(message, room_args)
-    else: # event
-        cls = room_event_mapping.get(msg_t)
-        if cls is not None:
-            return cls(message, room_args)
-
 def parse_notify_user(msg):
     event_name = msg['fields']['eventName']
     event = event_name.split('/')[1]
