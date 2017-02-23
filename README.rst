@@ -11,5 +11,12 @@ spirit as biboumi_.
 
 Currently, nothing works (experimenting the desired level of abstraction).
 
+Thanks
+======
+
+Many things were found out from reading the source of purple-rocketchat_, so
+I want to thank its author for taking the time to write the plugin.
+
 .. _Rocket.Chat: https://rocket.chat/
 .. _biboumi: https://biboumi.louiz.org/
+.. _purple-rocketchat: https://bitbucket.org/EionRobb/purple-rocketchat
