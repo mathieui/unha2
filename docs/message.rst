@@ -53,3 +53,21 @@ Sub-types for the "stream-notify-user" event
 - ``otr``
 - ``webrtc``
 - ``message``
+
+Sub-types for the "stream-notify-room" event
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- ``deleteMessage`` - The only one present in the docs. It doesn’t appear to do anything even on message deletion
+- ``typing`` - Typing notifications
+
+::
+
+    {
+      'msg': 'changed',
+      'collection': 'stream-notify-room',
+      'id': 'id',
+      'fields': {
+        'eventName': '<room-id>/typing',
+        'args': ['<user-nick>', user_is_typing (bool)]
+      }
+    }
