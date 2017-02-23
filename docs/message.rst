@@ -22,6 +22,10 @@ Message types
 Collections for the "changed" type
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Those are all notifications you have to subscribe to.
+All the notifications have an ``id`` attribute that is set to ``"id"``
+for some reason.
+
 - ``stream-notify-user``
 - ``stream-notify-all``
 - ``stream-notify-room``
