@@ -44,3 +44,12 @@ specific type, accessible at ``t``. Its possible values are:
 - ``room_changed_topic`` - The room topic changed
 - Nothing - normal message (can be new message, edited message, starred message, pinned message too)
 
+Sub-types for the "stream-notify-user" event
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- ``notification``
+- ``rooms-changed``
+- ``subscriptions-changed``
+- ``otr``
+- ``webrtc``
+- ``message``
