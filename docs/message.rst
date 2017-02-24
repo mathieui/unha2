@@ -136,8 +136,7 @@ Sub-types for the "stream-notify-user" event
       }
     }
 
-.. comment to breakup the code block
-
+-
   - On getting added to a room:
 
 ::
