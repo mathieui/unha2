@@ -54,6 +54,7 @@ Sub-types for the "stream-notify-user" event
 - ``notification`` - On new message
 
 ::
+
     {
       'msg': 'changed',
       'collection': 'stream-notify-user',
