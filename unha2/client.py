@@ -85,6 +85,15 @@ class Client:
     async def get_subscriptions(self):
         return await methods.get_subscriptions(self.ws, self.holder)
 
+    def subscribe_user_all(self):
+        for i in build.subs.ALLOWED_USER_SUBS:
+            asyncio.ensure_future(subscriptions.notify_user(
+                self.ws,
+                self.holder,
+                self.user_id,
+                i
+            ))
+
     def subscribe_to_room(self, room):
         room_id = room['room_id']
         asyncio.ensure_future(subscriptions.room_messages(
