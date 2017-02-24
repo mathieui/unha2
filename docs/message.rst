@@ -51,12 +51,145 @@ specific type, accessible at ``t``. Its possible values are:
 Sub-types for the "stream-notify-user" event
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- ``notification``
+- ``notification`` - On new message
+
+::
+    {
+      'msg': 'changed',
+      'collection': 'stream-notify-user',
+      'id': 'id',
+      'fields': {
+        'eventName': '<user-id>/notification',
+        'args': [
+          {
+            'title': '@<sender-nickname>',
+            'text': '<message-text>',
+            'payload': {
+              '_id': '<notification-id?>',
+              'rid': '<room-id>',
+              'sender': {
+                '_id': '<sender-user-id>',
+                'username': '<sender-nickname>'
+              },
+              'type': 'd'
+            }
+          }
+        ]
+      }
+    }
+
 - ``rooms-changed``
-- ``subscriptions-changed``
+
+::
+
+    {
+      'msg': 'changed',
+      'collection': 'stream-notify-user',
+      'id': 'id',
+      'fields': {
+        'eventName': '<user-id>/rooms-changed',
+        'args': [
+          'inserted',
+          {
+            '_id': '<notification-id?>',
+            'name': '<room-name>',
+            't': 'p',
+            'u': {
+              '_id': '<room-host-id>',
+              'username': '<host-nickname>'
+            },
+            'ro': False
+          }
+        ]
+      }
+    }
+
+- ``subscriptions-changed`` - On things happening in subscribed rooms?
+   - On new message in an existing room
+
+::
+
+    {
+      'msg': 'changed',
+      'collection': 'stream-notify-user',
+      'id': 'id',
+      'fields': {
+        'eventName': '<user-id>/subscriptions-changed',
+        'args': [
+          'inserted',
+          {
+            't': 'p',
+            'ts': {'$date': 1487895106540},
+            'name': '<room-name>',
+            'rid': '<room-id>',
+            'u': {
+              '_id': '<user-id>', 'username': '<user-nickname>'
+             },
+             'open': True,
+             'alert': False,
+             'unread': 0,
+             '_updatedAt': {'$date': 1487895106616},
+             '_id': '<notification-id?>'
+          }
+        ]
+      }
+    }
+
+  - On getting added to a room:
+
+::
+
+    {
+      'msg': 'changed',
+      'collection': 'stream-notify-user',
+      'id': 'id',
+      'fields': {
+        'eventName': '<user-id>/subscriptions-changed',
+        'args': [
+          'updated',
+          {
+            't': 'd',
+            'ts': {'$date': 1487510338929},
+            'ls': {'$date': 1487787132063},
+            'name': '<sender-nickname>',
+            'rid': '<room-id>',
+            'u': {
+              '_id': '<user-id>',
+              'username': '<user-nickname>'
+            },
+            'open': True,
+            'alert': True,
+            'unread': 1,
+            '_updatedAt': {'$date': 1487894400304},
+            '_id': '<notification-id?>'
+          }
+        ]
+      }
+    }
+
 - ``otr``
-- ``webrtc``
-- ``message``
+
+::
+
+    {
+      'msg': 'changed',
+      'collection': 'stream-notify-user',
+      'id': 'id',
+      'fields': {
+        'eventName': '<user-id>/otr',
+        'args': [
+          'handshake',
+          {
+            'roomId': '<room-id>',
+            'userId': '<requester-id>',
+            'publicKey': '{"crv":"P-256","ext":true,"key_ops":[],"kty":"EC","x":"joweSiQY7MqoFoLKHelRnfgBiiEMLQ77pNQ8LFvwK-A","y":"Y5ghdabGGy2eZnbPHDimUlTLW2xqsIW_W17P4eOjgGM"}'
+          }
+        ]
+      }
+    }
+
+- ``webrtc`` - ? (video/audio conferences go through jitsi meet, afaik)
+- ``message`` - ? (not triggered on messages, so far)
 
 Sub-types for the "stream-notify-room" event
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
