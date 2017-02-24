@@ -136,6 +136,8 @@ Sub-types for the "stream-notify-user" event
       }
     }
 
+.. comment to breakup the code block
+
   - On getting added to a room:
 
 ::
@@ -191,6 +193,11 @@ Sub-types for the "stream-notify-user" event
 
 - ``webrtc`` - ? (video/audio conferences go through jitsi meet, afaik)
 - ``message`` - ? (not triggered on messages, so far)
+
+Note: many actions generate twice the events if you are subscribed to several
+feeds. For example, getting added to a room generates a ``rooms-changed`` and
+a ``subscriptions-changed`` event; a new messgaes a ``subscriptions-changed``
+and a ``notification``, etc…
 
 Sub-types for the "stream-notify-room" event
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
