@@ -68,7 +68,6 @@ class Client:
         ))
 
     async def login(self):
-        print(type(self))
         res = await methods.login_sha256(
             self.ws,
             self.holder,
