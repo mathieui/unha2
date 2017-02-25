@@ -59,7 +59,7 @@ def _parse_subscription_update(result):
     return [{
         'type': RoomType(i['t']),
         'creation_time': ts(i['ts']) if i.get('ts') else None,
-        'last_seen_message': ts(i['ls']),
+        'last_seen_message': ts(i['ls']) if i.get('ls') else None,
         'name': i['name'],
         'room_id': i['rid'],
         'user': User(i['u']),
