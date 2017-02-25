@@ -101,6 +101,12 @@ class Client:
             self.holder,
             room_id
         ))
+        asyncio.ensure_future(subscriptions.notify_room(
+            self.ws,
+            self.holder,
+            room_id,
+            'typing'
+        ))
 
     def subscribe_to_rooms(self, room_list):
         for room in room_list:
