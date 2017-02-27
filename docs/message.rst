@@ -85,6 +85,30 @@ specific type, accessible at ``t``. Its possible values are:
 - ``au`` - A user was added to the room by someone
 - ``ru`` - A user was removed from the room by someone
 - ``user-muted`` - A user was muted
+
+::
+
+
+    {
+      'msg': 'changed',
+      'collection': 'stream-room-messages',
+      'id': 'id',
+      'fields': {
+        'eventName': '<room-id>',
+        'args': [{
+          '_id': '<message-id?>',
+          't': 'user-muted',
+          'rid': '<room-id>',
+          'ts': {'$date': 1488239477357},
+          'msg': '<username>',
+          'u': {'_id': '<user-id>', 'username': '<username>'},
+          'groupable': False,
+          '_updatedAt': {'$date': 1488239477357}
+        }]
+      }
+    }
+
+
 - ``user-unmuted`` - A user was unmuted
 - ``subscription-role-added`` - A user got a new role
 - ``subscription-role-removed`` - A user lost a role
