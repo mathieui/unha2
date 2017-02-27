@@ -7,7 +7,7 @@ import unha2.parse as parse
 import unha2.methods as methods
 import unha2.subscriptions as subscriptions
 import unha2.transport.websocket as sock
-from unha2.model.base import RawMessageType
+from unha2.model.base import RawMessageType, ChangedStreamMessage, RoomMessage
 from unha2.holder import AsyncHolder
 
 class Client:
@@ -45,13 +45,78 @@ class Client:
             elif type_ == RawMessageType.ADDED:
                 pass
             elif type_ == RawMessageType.CHANGED:
-                pass
+                self.on_changed(msg)
             elif type_ == RawMessageType.UPDATED:
                 pass
             elif type_ == RawMessageType.REMOVED:
                 pass
             elif type_ == RawMessageType.FAILED:
                 pass
+
+    def on_changed(self, msg):
+        msg_type = ChangedStreamMessage(msg['collection'])
+        if msg_type == ChangedStreamMessage.USERS:
+            self.on_users(msg)
+        elif msg_type == ChangedStreamMessage.NOTIFY_USER:
+            self.on_notify_user(msg)
+        elif msg_type == ChangedStreamMessage.NOTIFY_ROOM:
+            self.on_notify_room(msg)
+        elif msg_type == ChangedStreamMessage.ROOM_MESSAGES:
+            self.on_room_message(parse.changed.room_message(msg))
+
+    def on_users(self, msg):
+        pass
+
+    def on_notify_user(self, msg):
+        pass
+
+    def on_notify_room(self, msg):
+        pass
+
+    def on_room_message(self, msg):
+        room_dispatch = {
+            RoomMessage.USER_JOINED: self.on_user_joined,
+            RoomMessage.USER_LEFT: self.on_user_left,
+            RoomMessage.USER_ADDED: self.on_user_added,
+            RoomMessage.USER_REMOVED: self.on_user_removed,
+            RoomMessage.USER_MUTED: self.on_user_muted,
+            RoomMessage.USER_UNMUTED: self.on_user_unmuted,
+            RoomMessage.ROLE_ADDED: self.on_role_added,
+            RoomMessage.ROLE_REMOVED: self.on_role_removed,
+            RoomMessage.TOPIC_CHANGED: self.on_topic_changed,
+            RoomMessage.NORMAL_MESSAGE: self.on_normal_message
+        }
+        return room_dispatch[msg['type']](msg)
+
+    def on_user_joined(self, msg):
+        pass
+
+    def on_user_left(self, msg):
+        pass
+
+    def on_user_added(self, msg):
+        pass
+
+    def on_user_removed(self, msg):
+        pass
+
+    def on_user_muted(self, msg):
+        pass
+
+    def on_user_unmuted(self, msg):
+        pass
+
+    def on_role_added(self, msg):
+        pass
+
+    def on_role_removed(self, msg):
+        pass
+
+    def on_normal_message(self, msg):
+        pass
+
+    def on_topic_changed(self, msg):
+        pass
 
     def _connect(self):
         sock.send(self.ws, build.misc.connect())
