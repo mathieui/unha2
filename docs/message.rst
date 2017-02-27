@@ -91,6 +91,25 @@ specific type, accessible at ``t``. Its possible values are:
 - ``room_changed_topic`` - The room topic changed
 - Nothing - normal message (can be new message, edited message, starred message, pinned message too)
 
+::
+
+    {
+      'msg': 'changed',
+      'collection': 'stream-room-messages',
+      'id': 'id',
+      'fields': {
+        'eventName': '<room-id>',
+        'args': [{
+          '_id': '<message-id?>',
+          'rid': '<room-id>',
+          'msg': '<message-text> ',
+          'ts': {'$date': 1488238875497},
+          'u': {'_id': '<user-id>', 'username': '<username>'},
+          '_updatedAt': {'$date': 1488238875552}
+        }]
+      }
+    }
+
 Sub-types for the "stream-notify-user" event
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
