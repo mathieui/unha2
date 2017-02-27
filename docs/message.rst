@@ -39,6 +39,28 @@ specific type, accessible at ``t``. Its possible values are:
 
 - ``uj`` - A user joined the room
 - ``ul`` - A user left the room
+
+::
+
+    {
+      'msg': 'changed',
+      'collection': 'stream-room-messages',
+      'id': 'id',
+      'fields': {
+        'eventName': '<room-id>',
+        'args': [{
+          '_id': '<event-id?>',
+          't': 'ul',
+          'rid': '<room-id>',
+          'ts': {'$date': 1488238802977},
+          'msg': '<username>',
+          'u': {'_id': '<user-id>', 'username': '<username>'},
+          'groupable': False,
+          '_updatedAt': {'$date': 1488238802978}
+        }]
+      }
+    }
+
 - ``au`` - A user was added to the room by someone
 - ``ru`` - A user was removed from the room by someone
 - ``user-muted`` - A user was muted
