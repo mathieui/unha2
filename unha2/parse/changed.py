@@ -1,12 +1,13 @@
 import enum
 
 from ..model.base import User, RoomType, RoomMessage, ChangedStreamMessage
+from .. common import ts
 
 def _empty(msg):
     pass
 
 
-def parse_room_message(data):
+def room_message(data):
     msg = data['fields']['args'][0]
     return {
         'id': msg['_id'],
@@ -25,7 +26,7 @@ def parse_room_message(data):
         'parse_urls': msg.get('parseUrls', False),
     }
 
-def parse_url_meta(data):
+def url_meta(data):
     return {
         'url': data['url'],
         'meta': data['meta'],
@@ -34,25 +35,25 @@ def parse_url_meta(data):
     }
 
 
-def parse_room_notif(msg):
+def room_notif(msg):
     pass
 
 def get_collection(msg):
     return msg['collection']
 
-def parse_changed_msg(msg):
+def changed_msg(msg):
     collection = get_collection('msg')
     PARSERS['changed'][collection]
 
-def parse_removed_users(msg):
+def removed_users(msg):
     user_id = msg['_id']
 
-def parse_notify_user(msg):
+def notify_user(msg):
     event_name = msg['fields']['eventName']
     event = event_name.split('/')[1]
     args = msg['fields']['args']
 
-def parse_rooms_changed(args):
+def rooms_changed(args):
     type_ = args[0]
     params = args[1]
     room_type = RoomType(params['t'])
@@ -63,16 +64,16 @@ def parse_rooms_changed(args):
     elif room_type == RoomType.DIRECT:
         pass
 
-def parse_changed_chat(params):
+def changed_chat(params):
     room_id = params['_id']
     room_name = params['name']
     room_topic = params['topic']
     room_muted = params['muted']
     room_jitsitimeout = params['jitsiTimeout']
 
-def parse_changed_direct(params):
+def changed_direct(params):
     room_id = params['_id']
 
-def parse_changed_private(params):
+def changed_private(params):
     pass
 

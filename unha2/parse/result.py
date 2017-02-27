@@ -1,14 +1,14 @@
 from .. common import ts
 from .. model.base import RoomType, User
 
-def parse_login(result):
+def login(result):
     return {
         'user_id': result['id'],
         'token': result['token'],
         'expires': ts(result['tokenExpires'])
     }
 
-def parse_emojis(result):
+def emojis(result):
     return [{
         'id': i['_id'],
         'name': i['name'],
@@ -35,7 +35,7 @@ def load_history(result):
         'parse_urls': i.get('parseUrls', False)
     } for i in result]
 
-def parse_user_roles(result):
+def user_roles(result):
     return [{
         'id': i['room-id'],
         'user': User(i['u']),
@@ -43,7 +43,7 @@ def parse_user_roles(result):
         'role_id': i['_id']
     } for i in result]
 
-def parse_subscriptions(result):
+def subscriptions(result):
     return {
         'update': _parse_subscription_update(result['update']),
         'remove': _parse_subscription_remove(result['remove'])
@@ -71,13 +71,13 @@ def _parse_subscription_update(result):
         'sub_id': i['_id']
     } for i in result]
 
-def parse_users(result):
+def users(result):
     return {
         'total_number': result['total'],
         'users': result['records']
     }
 
-def parse_rooms(result):
+def rooms(result):
     return {
         'update': _parse_rooms_update(result['update']),
         'remove': _parse_rooms_remove(result['remove'])
@@ -94,7 +94,7 @@ def _parse_rooms_update(rooms):
 def _parse_rooms_remove(rooms):
     return [{'id': room['_id']} for room in rooms]
 
-def parse_permissions(result):
+def permissions(result):
     return [{
         'id': i['_id'],
         'roles': i['roles'],
@@ -103,9 +103,9 @@ def parse_permissions(result):
     } for i in result]
 
 
-def parse_create_channel(result):
+def create_channel(result):
     return {
         'id': result['rid']
     }
 
-parse_create_group = parse_create_channel
+create_group = create_channel
