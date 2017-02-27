@@ -18,4 +18,4 @@ if __name__ == "__main__":
     loop = asyncio.get_event_loop()
     client = ExampleClient('demo.rocket.chat', 'my_username', 'my_password')
     asyncio.ensure_future(client.handler_loop())
-    loop.run_until_complete(client.main(loop))
+    loop.run_until_complete(client.network_main(loop))

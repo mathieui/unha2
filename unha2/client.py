@@ -112,7 +112,7 @@ class Client:
         for room in room_list:
             self.subscribe_to_room(room)
 
-    async def main(self, loop):
+    async def network_loop(self, loop):
         async with sock.session(loop) as session:
             async with sock.connect(session, self.server) as ws:
                 self.ws = ws
