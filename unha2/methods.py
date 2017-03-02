@@ -13,6 +13,12 @@ async def get_users(ws, holder: AsyncHolder, room_id: str) -> dict:
     online = result['result']['records']
     return parse.result.users(result['result'])
 
+async def load_history(ws, holder: AsyncHolder, room_id: str, last_received: str, quantity: int, oldest_wanted=None):
+    uid = uuid()
+    payload = build.methods.load_history(uid, room_id, last_received, quantity, oldest_wanted)
+    result = await holder.send_method(ws, uid, payload)
+    return parse.result.load_history(result['result'])
+
 async def get_rooms(ws, holder: AsyncHolder, date=0) -> dict:
     uid = uuid()
     payload = build.methods.get_rooms(uid, date)

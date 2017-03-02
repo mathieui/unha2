@@ -18,10 +18,11 @@ def emojis(result):
     } for i in result]
 
 def load_history(result):
+    messages = result['messages'][::-1] # oldest first
     return [{
         'id': i['_id'],
         'room_id': i['rid'],
-        'text': i['msg'],
+        'msg': i['msg'],
         'creation_time': ts(i['ts']),
         'user': User(i['u']),
         'update_time': ts(i['_updatedAt']),
@@ -33,7 +34,7 @@ def load_history(result):
         'avatar': i.get('avatar', ''),
         'groupable': i.get('groupable', False),
         'parse_urls': i.get('parseUrls', False)
-    } for i in result]
+    } for i in messages]
 
 def user_roles(result):
     return [{
