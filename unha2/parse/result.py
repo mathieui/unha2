@@ -1,5 +1,5 @@
 from .. common import ts
-from .. model.base import RoomType, User
+from .. model.base import RoomType, User, RoomMessage
 
 def login(result):
     return {
@@ -22,6 +22,7 @@ def load_history(result):
     return [{
         'id': i['_id'],
         'room_id': i['rid'],
+        'type': RoomMessage(i.get('t', '')),
         'msg': i['msg'],
         'creation_time': ts(i['ts']),
         'user': User(i['u']),
