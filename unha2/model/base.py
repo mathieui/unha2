@@ -29,6 +29,7 @@ class RoomMessage(enum.Enum):
     ROLE_ADDED = 'subscription-role-added'
     ROLE_REMOVED = 'subscription-role-removed'
     TOPIC_CHANGED = 'room_changed_topic'
+    REMOVE = 'rm'
     NORMAL_MESSAGE = ''
 
 class ChangedStreamMessage(enum.Enum):

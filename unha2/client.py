@@ -84,7 +84,8 @@ class Client:
             RoomMessage.ROLE_ADDED: self.on_role_added,
             RoomMessage.ROLE_REMOVED: self.on_role_removed,
             RoomMessage.TOPIC_CHANGED: self.on_topic_changed,
-            RoomMessage.NORMAL_MESSAGE: self.on_normal_message
+            RoomMessage.NORMAL_MESSAGE: self.on_normal_message,
+            RoomMessage.REMOVE: lambda x: None
         }
         return room_dispatch[msg['type']](msg)
 

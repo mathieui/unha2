@@ -85,6 +85,7 @@ specific type, accessible at ``t``. Its possible values are:
 - ``au`` - A user was added to the room by someone
 - ``ru`` - A user was removed from the room by someone
 - ``user-muted`` - A user was muted
+- ``rm`` - ??
 
 ::
 
