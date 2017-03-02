@@ -55,7 +55,7 @@ def get_room_id(uid: str, room_name: str) -> dict:
     msg = {
         'msg': 'method',
         'id': uid,
-        'method': 'getRoomByNameOrId',
+        'method': 'getRoomIdByNameOrId',
         'params': [room_name]
     }
     return msg
