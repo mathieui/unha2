@@ -148,6 +148,9 @@ class Client:
     async def get_rooms(self):
         return await methods.get_rooms(self.ws, self.holder, 0)
 
+    async def get_room_id(self, room_name):
+        return await methods.get_room_id(self.ws, self.holder, room_name)
+
     async def get_subscriptions(self):
         return await methods.get_subscriptions(self.ws, self.holder)
 

@@ -108,4 +108,7 @@ def create_channel(result):
         'id': result['rid']
     }
 
+def room_id(result):
+    return {'room_id': result}
+
 create_group = create_channel

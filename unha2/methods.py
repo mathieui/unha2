@@ -38,3 +38,8 @@ async def send_message(ws, holder: AsyncHolder, room_id: str, text: str) -> dict
     result = await holder.send_method(ws, uid, payload)
     return result
 
+async def get_room_id(ws, holder: AsyncHolder, room_name: str) -> dict:
+    uid = uuid()
+    payload = build.methods.get_room_id(uid, room_name)
+    result = await holder.send_method(ws, uid, payload)
+    return parse.result.room_id(result['result'])
