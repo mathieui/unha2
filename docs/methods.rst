@@ -18,6 +18,13 @@ as it can be:
 - `nothing but replaced with an "error" element`_
 - `a boolean`_
 
+Undocumented but useful methods
+===============================
+
+- ``getRoomIdByNameOrId`` - As it sounds. It is a necessity.
+- ``channelsList`` - List channels with a filter
+- ``getUsersOfRoom`` - Get the userlist + number of users
+- ``readMessages`` - Mark messages as read
 
 .. _1:  https://rocket.chat/docs/developer-guides/realtime-api/method-calls/delete-rooms/
 .. _a list containing exactly one element: https://rocket.chat/docs/developer-guides/realtime-api/method-calls/create-channels/
