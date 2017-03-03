@@ -37,26 +37,26 @@ Sub-types for the "stream-room-messages" event
 Each event data in a ``stream-room-messages`` ``changed`` event has a
 specific type, accessible at ``t``. Its possible values are:
 
-- ``uj`` - A user joined the room `Example <user-join>`_
-- ``ul`` - A user left the room `Example <user-left>`_
+- ``uj`` - A user joined the room `Example <user-join_>`_
+- ``ul`` - A user left the room `Example <user-left_>`_
 - ``au`` - A user was added to the room by someone
 - ``ru`` - A user was removed from the room by someone
-- ``user-muted`` - A user was muted `Example <user-muted>`_
+- ``user-muted`` - A user was muted `Example <user-muted_>`_
 - ``user-unmuted`` - A user was unmuted
 - ``subscription-role-added`` - A user got a new role
 - ``subscription-role-removed`` - A user lost a role
 - ``room_changed_topic`` - The room topic changed
 - ``rm`` - ??
-- Nothing - normal message (can be new message, edited message, starred message, pinned message too) `Example <normal-message>`_
+- Nothing - normal message (can be new message, edited message, starred message, pinned message too) `Example <normal-message_>`_
 
 
 Sub-types for the "stream-notify-user" event
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- ``notification`` - On new message `Example <notification>`_
-- ``rooms-changed`` - Rooms changed `Example <rooms-changed>`_
-- ``subscriptions-changed`` - On things happening in subscribed rooms? `Example <subscriptions-changed>`_
-- ``otr`` `Example <otr>`_
+- ``notification`` - On new message `Example <notification_>`_
+- ``rooms-changed`` - Rooms changed `Example <rooms-changed_>`_
+- ``subscriptions-changed`` - On things happening in subscribed rooms? `Example <subscriptions-changed_>`_
+- ``otr`` `Example <otr_>`_
 - ``webrtc`` - ? (video/audio conferences go through jitsi meet, afaik)
 - ``message`` - ? (not triggered on messages, so far)
 
