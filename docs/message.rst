@@ -37,7 +37,64 @@ Sub-types for the "stream-room-messages" event
 Each event data in a ``stream-room-messages`` ``changed`` event has a
 specific type, accessible at ``t``. Its possible values are:
 
-- ``uj`` - A user joined the room
+- ``uj`` - A user joined the room `Example <user-join>`_
+- ``ul`` - A user left the room `Example <user-left>`_
+- ``au`` - A user was added to the room by someone
+- ``ru`` - A user was removed from the room by someone
+- ``user-muted`` - A user was muted `Example <user-muted>`_
+- ``user-unmuted`` - A user was unmuted
+- ``subscription-role-added`` - A user got a new role
+- ``subscription-role-removed`` - A user lost a role
+- ``room_changed_topic`` - The room topic changed
+- ``rm`` - ??
+- Nothing - normal message (can be new message, edited message, starred message, pinned message too) `Example <normal-message>`_
+
+
+Sub-types for the "stream-notify-user" event
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- ``notification`` - On new message `Example <notification>`_
+- ``rooms-changed`` - Rooms changed `Example <rooms-changed>`_
+- ``subscriptions-changed`` - On things happening in subscribed rooms? `Example <subscriptions-changed>`_
+- ``otr`` `Example <otr>`_
+- ``webrtc`` - ? (video/audio conferences go through jitsi meet, afaik)
+- ``message`` - ? (not triggered on messages, so far)
+
+Note: many actions generate twice the events if you are subscribed to several
+feeds. For example, getting added to a room generates a ``rooms-changed`` and
+a ``subscriptions-changed`` event; a new messages a ``subscriptions-changed``
+and a ``notification``, etc…
+
+Sub-types for the "stream-notify-room" event
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- ``deleteMessage`` - The only one present in the docs. It doesn’t appear to do anything even on message deletion
+- ``typing`` - Typing notifications
+
+::
+
+    {
+      'msg': 'changed',
+      'collection': 'stream-notify-room',
+      'id': 'id',
+      'fields': {
+        'eventName': '<room-id>/typing',
+        'args': ['<user-nick>', user_is_typing (bool)]
+      }
+    }
+
+
+Examples
+========
+
+Changed
+~~~~~~~
+
+stream-room-messages
+^^^^^^^^^^^^^^^^^^^^
+.. _user-join:
+
+User join:
 
 ::
 
@@ -59,7 +116,10 @@ specific type, accessible at ``t``. Its possible values are:
         }]
       }
     }
-- ``ul`` - A user left the room
+
+.. _user-left:
+
+User left:
 
 ::
 
@@ -82,10 +142,10 @@ specific type, accessible at ``t``. Its possible values are:
       }
     }
 
-- ``au`` - A user was added to the room by someone
-- ``ru`` - A user was removed from the room by someone
-- ``user-muted`` - A user was muted
-- ``rm`` - ??
+
+.. _user-muted:
+
+User muted:
 
 ::
 
@@ -109,12 +169,9 @@ specific type, accessible at ``t``. Its possible values are:
       }
     }
 
+.. _normal-message:
 
-- ``user-unmuted`` - A user was unmuted
-- ``subscription-role-added`` - A user got a new role
-- ``subscription-role-removed`` - A user lost a role
-- ``room_changed_topic`` - The room topic changed
-- Nothing - normal message (can be new message, edited message, starred message, pinned message too)
+Normal message:
 
 ::
 
@@ -135,10 +192,12 @@ specific type, accessible at ``t``. Its possible values are:
       }
     }
 
-Sub-types for the "stream-notify-user" event
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+stream-notify-user
+^^^^^^^^^^^^^^^^^^
 
-- ``notification`` - On new message
+.. _notification:
+
+Notification:
 
 ::
 
@@ -166,7 +225,9 @@ Sub-types for the "stream-notify-user" event
       }
     }
 
-- ``rooms-changed``
+.. _rooms-changed:
+
+Rooms-changed:
 
 ::
 
@@ -192,8 +253,11 @@ Sub-types for the "stream-notify-user" event
       }
     }
 
-- ``subscriptions-changed`` - On things happening in subscribed rooms?
-   - On new message in an existing room
+.. _subscriptions-changed:
+
+Subscriptions-changed:
+
+- On new message in an existing room
 
 ::
 
@@ -223,8 +287,7 @@ Sub-types for the "stream-notify-user" event
       }
     }
 
--
-  - On getting added to a room:
+- On getting added to a room:
 
 ::
 
@@ -256,7 +319,9 @@ Sub-types for the "stream-notify-user" event
       }
     }
 
-- ``otr``
+.. _otr:
+
+OTR:
 
 ::
 
@@ -277,28 +342,3 @@ Sub-types for the "stream-notify-user" event
       }
     }
 
-- ``webrtc`` - ? (video/audio conferences go through jitsi meet, afaik)
-- ``message`` - ? (not triggered on messages, so far)
-
-Note: many actions generate twice the events if you are subscribed to several
-feeds. For example, getting added to a room generates a ``rooms-changed`` and
-a ``subscriptions-changed`` event; a new messages a ``subscriptions-changed``
-and a ``notification``, etc…
-
-Sub-types for the "stream-notify-room" event
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-- ``deleteMessage`` - The only one present in the docs. It doesn’t appear to do anything even on message deletion
-- ``typing`` - Typing notifications
-
-::
-
-    {
-      'msg': 'changed',
-      'collection': 'stream-notify-room',
-      'id': 'id',
-      'fields': {
-        'eventName': '<room-id>/typing',
-        'args': ['<user-nick>', user_is_typing (bool)]
-      }
-    }
