@@ -37,6 +37,7 @@ Sub-types for the "stream-room-messages" event
 Each event data in a ``stream-room-messages`` ``changed`` event has a
 specific type, accessible at ``t``. Its possible values are:
 
+
 - ``uj`` - A user joined the room `Example <user-join_>`_
 - ``ul`` - A user left the room `Example <user-left_>`_
 - ``au`` - A user was added to the room by someone
@@ -46,9 +47,14 @@ specific type, accessible at ``t``. Its possible values are:
 - ``subscription-role-added`` - A user got a new role
 - ``subscription-role-removed`` - A user lost a role
 - ``room_changed_topic`` - The room topic changed
-- ``rm`` - ??
+- ``rm`` - ?? (seen in demo.rocket.chat)
 - Nothing - normal message (can be new message, edited message, starred message, pinned message too) `Example <normal-message_>`_
 
+If a message is created as a result of someone’s actions on someone else,
+the meaningful data (the nick of the person being added/removed) is carried
+by the ``msg`` attribute, while the ``u`` which usually contains user data
+contains the user id/name of the moderator doing the action. E.g. ``au``,
+``ru``.
 
 Sub-types for the "stream-notify-user" event
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
