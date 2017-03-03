@@ -88,10 +88,10 @@ Examples
 ========
 
 Changed
-~~~~~~~
+-------
 
 stream-room-messages
-^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~
 .. _user-join:
 
 User join:
@@ -193,7 +193,7 @@ Normal message:
     }
 
 stream-notify-user
-^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~
 
 .. _notification:
 
