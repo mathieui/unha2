@@ -104,6 +104,11 @@ def permissions(result):
         'meta': i['meta']
     } for i in result]
 
+def join_room(result):
+    return result
+
+def open_room(result):
+    return result
 
 def create_channel(result):
     return {
