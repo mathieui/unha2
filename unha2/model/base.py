@@ -46,8 +46,8 @@ class NotifyUser(enum.Enum):
 class User:
     __slots__ = ['id', 'name']
     def __init__(self, obj: Mapping[str, str]):
-        self.id = obj['_id']
-        self.name = obj['username']
+        self.id = obj['_id'] or 'unknown'
+        self.name = obj['username'] or 'Unknown'
 
     def __eq__(self, other):
         return self.id == other.id and self.name == other.name
