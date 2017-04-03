@@ -116,11 +116,21 @@ class Client:
         self._holder = AsyncHolder()
         self.api = ClientAPI(self.data, self.ws, self._holder)
         self._queue = Queue()
-        self.stop = False
+        self._stop = False
         self._ws = None
 
     def ws(self):
         return self._ws
+
+    @property
+    def stop(self):
+        return self._stop
+
+    @stop.setter
+    def stop(self, value):
+        if value:
+            self._stop = True
+            self._queue.put_nowait(None)
 
     async def network_loop(self, loop):
         async with sock.session(loop) as session:
@@ -132,6 +142,8 @@ class Client:
     async def handler_loop(self):
         while not self.stop:
             msg = await self._queue.get()
+            if not msg:
+                continue
             msgtype = parse.base.msg_type(msg)
             if msgtype == RawMessageType.NONE:
                 self.do_connect()
