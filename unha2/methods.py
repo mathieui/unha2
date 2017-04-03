@@ -4,6 +4,8 @@ from . import build
 from . import parse
 from . holder import AsyncHolder
 
+class MethodError(Exception): pass
+
 async def get_users(ws, holder: AsyncHolder, room_id: str) -> dict:
     uid = uuid()
     payload = build.methods.get_users(uid, room_id)
@@ -14,13 +16,22 @@ async def load_history(ws, holder: AsyncHolder, room_id: str, last_received: str
     uid = uuid()
     payload = build.methods.load_history(uid, room_id, last_received, quantity, oldest_wanted)
     result = await holder.send_method(ws, uid, payload)
-    return parse.result.load_history(result['result'])
+    data = result.get('result')
+    if data:
+        return parse.result.load_history(data)
+    else:
+        raise MethodError(result)
+
 
 async def get_rooms(ws, holder: AsyncHolder, date=0) -> dict:
     uid = uuid()
     payload = build.methods.get_rooms(uid, date)
     result = await holder.send_method(ws, uid, payload)
-    return parse.result.rooms(result['result'])
+    data = result.get('result')
+    if data:
+        return parse.result.rooms(result['result'])
+    else:
+        raise MethodError(result)
 
 async def get_subscriptions(ws, holder: AsyncHolder, date=0) -> dict:
     uid = uuid()
@@ -32,7 +43,11 @@ async def login_sha256(ws, holder: AsyncHolder, username: str, password: str) ->
     uid = uuid()
     payload = build.methods.login_sha256(uid, username, password)
     result = await holder.send_method(ws, uid, payload)
-    return parse.result.login(result['result'])
+    data = result.get('result')
+    if data:
+        return parse.result.login(result['result'])
+    else:
+        raise MethodError(result)
 
 async def login_resume(ws, holder: AsyncHolder, token: str) -> dict:
     uid = uuid()
@@ -51,7 +66,11 @@ async def get_room_id(ws, holder: AsyncHolder, room_name: str) -> dict:
     uid = uuid()
     payload = build.methods.get_room_id(uid, room_name)
     result = await holder.send_method(ws, uid, payload)
-    return parse.result.room_id(result['result'])
+    data = result.get('result')
+    if data:
+        return parse.result.room_id(result['result'])
+    else:
+        raise MethodError(result)
 
 async def join_room(ws, holder: AsyncHolder, room_id: str, join_code: Optional[str]=None) -> dict:
     uid = uuid()
