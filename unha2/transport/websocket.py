@@ -1,4 +1,3 @@
-import json
 import logging
 import random
 
@@ -46,7 +45,6 @@ async def ws_loop(ws,):
 async def ws_callback_loop(ws, handler, **handlers):
     o_handler = handlers.get('o_handler', _empty)
     h_handler = handlers.get('h_handler', _empty)
-    c_handler = handlers.get('c_handler', _empty_close)
     async for msg in ws:
         if msg.type == aiohttp.WSMsgType.TEXT:
             char = msg.data[0]
