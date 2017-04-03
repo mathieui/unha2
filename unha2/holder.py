@@ -1,5 +1,5 @@
 import asyncio
-from typing import Mapping
+from typing import Dict, Mapping
 from . transport import websocket as sock
 
 class AsyncHolder:
@@ -9,20 +9,20 @@ class AsyncHolder:
     result is received.
     """
     def __init__(self):
-        self.awaited_subs: Mapping[str, asyncio.Future] = {}
-        self.awaited_methods: Mapping[str, asyncio.Future] = {}
+        self.awaited_subs: Dict[str, asyncio.Future] = {}
+        self.awaited_methods: Dict[str, asyncio.Future] = {}
 
     async def send_sub(self, ws, uid: str, msg: Mapping):
-        fut = asyncio.Future()
+        fut: asyncio.Future = asyncio.Future()
         self.awaited_subs[uid] = fut
         sock.send(ws, msg)
         return await fut
 
     def send_sub_noblock(self, ws, uid: str, msg: Mapping, callback=None):
         if callback:
-            fut = asyncio.Future()
+            fut: asyncio.Future = asyncio.Future()
             fut.add_done_callback(callback)
-            self.awaited[uid] = fut
+            self.awaited_subs[uid] = fut
         sock.send(ws, msg)
 
     async def send_method(self, ws, uid, msg):
@@ -33,9 +33,9 @@ class AsyncHolder:
 
     def send_method_noblock(self, ws, uid: str, msg: Mapping, callback=None):
         if callback:
-            fut = asyncio.Future()
+            fut: asyncio.Future = asyncio.Future()
             fut.add_done_callback(callback)
-            self.awaited[uid] = fut
+            self.awaited_methods[uid] = fut
         sock.send(ws, msg)
 
     def recv_result(self, result: Mapping):
